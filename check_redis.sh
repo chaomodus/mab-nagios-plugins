@@ -163,8 +163,8 @@ get_vals() {
         connected_clients=`grep connected_clients ${filename} | awk -F: '{print $2}' | tr -d '\r'`
         connected_slaves=`grep connected_slaves ${filename} | awk -F: '{print $2}' | tr -d '\r'`
         uptime_in_days=`grep uptime_in_days ${filename} | awk -F: '{print $2}' | tr -d '\r'`
-        db0keys=`grep db0 ${output_dir}/$PROGNAME-${hostname}.1 | awk -F, '{print $1}' | awk -F= '{print $2}' | tr -d '\r'`
-        db0expires=`grep db0 ${output_dir}/$PROGNAME-${hostname}.1 | awk -F, '{print $2}' | awk -F= '{print $2}' | tr -d '\r'`
+        db0keys=`grep 'db.:' ${output_dir}/$PROGNAME-${hostname}.1 | awk -F, '{print $1}' | awk -F= '{print $2}' | tr -d '\r\n'`
+        db0expires=`grep db.: ${output_dir}/$PROGNAME-${hostname}.1 | awk -F, '{print $2}' | awk -F= '{print $2}' | tr -d '\r\n'`
 
         rm -f ${filename}
 }
@@ -180,7 +180,7 @@ DB0 ($db0keys keys $db0expires expires)"
 }
 
 do_perfdata() {
-    perfdata="'Memory'=$used_memory_human 'Clients'=$connected_clients 'DB0.keys'=$db0keys"
+    perfdata="memory=$used_memory, clients=$connected_clients, dbkeys=$db0keys"
 }
 
 
