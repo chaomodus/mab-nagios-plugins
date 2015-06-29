@@ -15,8 +15,8 @@
 #   Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 PROGNAME=`basename $0`
-VERSION="Version 0.1.0,"
-AUTHOR="MAB (MAB@MAB.NET), Based on Mike Adolphs (http://www.matejunkie.com/) check_nginx.sh code"
+VERSION="Version 0.2.0,"
+AUTHOR="cas@manzama.com from MAB (MAB@MAB.NET), Based on Mike Adolphs (http://www.matejunkie.com/) check_nginx.sh code"
 
 
 ST_OK=0
@@ -180,7 +180,7 @@ DB0 ($db0keys keys $db0expires expires)"
 }
 
 do_perfdata() {
-    perfdata="memory=$used_memory, clients=$connected_clients, dbkeys=$db0keys"
+    perfdata="memory=$(echo $used_memory | awk '{print $1}'), clients=$connected_clients, dbkeys=$db0keys"
 }
 
 
