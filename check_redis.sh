@@ -180,7 +180,7 @@ DB0 ($db0keys keys $db0expires expires)"
 }
 
 do_perfdata() {
-    perfdata="memory=$(echo $used_memory | awk '{print $1}'), clients=$connected_clients, dbkeys=$db0keys"
+    perfdata="memory=$(echo $used_memory | awk '{print $1}');$warning;$critical;0 clients=$connected_clients;;; dbkeys=$db0keys;;;"
 }
 
 
